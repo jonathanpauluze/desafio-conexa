@@ -1,15 +1,14 @@
 import { FC } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+
+import Routes from './routes';
 
 const App: FC = () => {
   return (
-    <>
-      <h1>Olá, Conexa!</h1>
-      <p>
-        Easter Egg do primeiro commit:
-        estou me esforçando 110% para esta vaga ser minha!
-      </p>
-    </>
+    <BrowserRouter>
+      <Routes />
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
