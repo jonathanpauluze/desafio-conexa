@@ -15,35 +15,6 @@ export const GlobalStyle = createGlobalStyle`
     --blue-dark: #1C307F;
   }
 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  html {
-    @media (max-width: 1080px) {
-      font-size: 93.75%;
-    }
-    @media (max-width: 720px) {
-      font-size: 87.5%;
-    }
-  }
-
-  body {
-    font-family: var(--font-primary);
-    -webkit-font-smoothing: antialiased;
-  }
-
-  button {
-    cursor: pointer;
-  }
-
-  [disabled] {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-
 
   /* http://meyerweb.com/eric/tools/css/reset/
     v2.0 | 20110126
@@ -92,5 +63,33 @@ export const GlobalStyle = createGlobalStyle`
   table {
     border-collapse: collapse;
     border-spacing: 0;
+  }
+
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    @media (max-width: 1080px) {
+      font-size: 93.75%;
+    }
+    @media (max-width: 720px) {
+      font-size: 87.5%;
+    }
+  }
+
+  body {
+    font-family: var(--font-primary);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  [disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
 `;
