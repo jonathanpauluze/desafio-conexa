@@ -1,8 +1,8 @@
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode, ButtonHTMLAttributes } from 'react';
 
 import { ButtonContainer } from './styles';
 
-interface ButtonOutlineProps {
+interface ButtonOutlineProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
 }
 
