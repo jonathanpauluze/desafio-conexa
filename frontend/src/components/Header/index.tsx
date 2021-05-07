@@ -11,7 +11,7 @@ const Header: FC = () => {
   const isLoggedIn = false;
 
   return (
-    <HeaderContainer>
+    <HeaderContainer isLoggedIn={isLoggedIn}>
       <Link to="/">
         <img src={logoImg} alt="Logo Conexa" />
       </Link>
