@@ -2,6 +2,9 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   :root {
+    --font-primary: 'Nunito', sans-serif;
+    --font-secondary: 'Montserrat', sans-serif;
+
     --white: #FFFFFF;
     --offwhite: #FFFFFB;
     --gray: #DAD2D0;
@@ -28,6 +31,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    font-family: var(--font-primary);
     -webkit-font-smoothing: antialiased;
   }
 
