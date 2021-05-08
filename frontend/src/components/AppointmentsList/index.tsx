@@ -1,4 +1,7 @@
-import { FC } from 'react';
+import { FC, useState, useEffect } from 'react';
+
+import { useAuth } from '../../hooks/auth';
+import api from '../../services/api';
 
 import { EmptyState } from '../EmptyState';
 import { Button } from '../Button';
@@ -22,30 +25,27 @@ interface Appointment {
 }
 
 const AppointmentsList: FC = () => {
-  const appointments: Appointment[] = [
-    {
-      id: 1,
-      patientId: 1,
-      date: new Date(),
-      patient: {
-        id: 1,
-        first_name: 'Jonathan',
-        last_name: 'Pauluze dos Santos Vieira Almeida Vegara',
-        email: 'jonathan@conexa.com',
-      },
-    },
-    {
-      id: 2,
-      patientId: 2,
-      date: new Date(),
-      patient: {
-        id: 2,
-        first_name: 'Winona',
-        last_name: 'Pauluze dos Santos Vieira Almeida Vegara',
-        email: 'winona@conexa.com',
-      },
-    },
-  ];
+  const [appointments, setAppointments] = useState<Appointment[]>([]);
+  const { token } = useAuth();
+
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      const requestConfig = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const response = await api.get(
+        '/consultations?_expand=patient',
+        requestConfig,
+      );
+
+      setAppointments(response.data);
+    };
+
+    fetchAppointments();
+  }, [token]);
 
   if (!appointments.length) {
     return <EmptyState>Não há nenhuma consulta agendada</EmptyState>;
@@ -59,8 +59,8 @@ const AppointmentsList: FC = () => {
 
       {appointments.map(({ id, date, patient }) => {
         const fullName = `${patient.first_name} ${patient.last_name}`;
-        const formattedDate = date.toLocaleDateString('pt-BR');
-        const formattedTime = date.toLocaleTimeString('pt-BR', {
+        const formattedDate = new Date(date).toLocaleDateString('pt-BR');
+        const formattedTime = new Date(date).toLocaleTimeString('pt-BR', {
           hour: 'numeric',
           minute: 'numeric',
         });
