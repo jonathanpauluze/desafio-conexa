@@ -1,13 +1,14 @@
 import { FC, useRef, useCallback } from 'react';
 import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
-import { useHistory } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 import { Input } from '../Input';
 import { Button } from '../Button';
 
-import type { SignInCredentials } from '../../hooks/AuthContext';
-import { useAuth } from '../../hooks/AuthContext';
+import type { SignInCredentials } from '../../hooks/auth';
+import { useAuth } from '../../hooks/auth';
 
 import getValidationErrors from '../../utils/getValidationErrors';
 
@@ -16,7 +17,6 @@ import { SignInFormContainer } from './styles';
 const SignInForm: FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { signIn } = useAuth();
-  const history = useHistory();
 
   const handleSubmit = useCallback(
     async (data: SignInCredentials) => {
@@ -34,35 +34,51 @@ const SignInForm: FC = () => {
           abortEarly: false,
         });
 
-        signIn(data);
-
-        history.push('/appointments');
+        await signIn(data);
       } catch (err) {
-        const errors = getValidationErrors(err);
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
 
-        formRef.current?.setErrors(errors);
+          formRef.current?.setErrors(errors);
+
+          return;
+        }
+
+        toast.error('Usuário ou senha inválido', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       }
     },
-    [signIn, history],
+    [signIn],
   );
 
   return (
-    <SignInFormContainer ref={formRef} onSubmit={handleSubmit}>
-      <Input
-        type="email"
-        name="email"
-        label="E-mail"
-        placeholder="Digite seu e-mail"
-      />
-      <Input
-        type="password"
-        name="password"
-        label="Senha"
-        placeholder="Digite sua senha"
-        tooltip="Sua senha de acesso é recebida por e-mail."
-      />
-      <Button type="submit">Entrar</Button>
-    </SignInFormContainer>
+    <>
+      <SignInFormContainer ref={formRef} onSubmit={handleSubmit}>
+        <Input
+          type="email"
+          name="email"
+          label="E-mail"
+          placeholder="Digite seu e-mail"
+        />
+        <Input
+          type="password"
+          name="password"
+          label="Senha"
+          placeholder="Digite sua senha"
+          tooltip="Sua senha de acesso é recebida por e-mail."
+        />
+        <Button type="submit">Entrar</Button>
+      </SignInFormContainer>
+
+      <ToastContainer />
+    </>
   );
 };
 
