@@ -9,7 +9,6 @@ export const EmptyStateContainer = styled.div`
   align-items: center;
   width: 100%;
   min-height: 22.5rem;
-  margin-top: 2.5rem;
 
   @media (max-width: 768px) {
     min-height: 13.75rem;

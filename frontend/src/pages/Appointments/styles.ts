@@ -7,7 +7,7 @@ export const AppointmentsContainer = styled.main`
   padding: 0 1rem;
 
   h1 {
-    margin: 2rem 0 0 1rem;
+    margin: 2rem 0 2.5rem 1rem;
     font-size: 3rem;
     font-weight: bold;
     color: var(--blue-dark);
