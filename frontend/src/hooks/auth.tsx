@@ -55,8 +55,6 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     localStorage.setItem('@conexa:token', token);
     localStorage.setItem('@conexa:name', name);
 
-    api.defaults.headers.authorization = `Bearer ${token}`;
-
     setData({ token, name });
   }, []);
 
