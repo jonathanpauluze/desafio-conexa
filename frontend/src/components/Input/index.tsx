@@ -9,13 +9,14 @@ import {
 import { useField } from '@unform/core';
 import { FiHelpCircle, FiEye, FiEyeOff } from 'react-icons/fi';
 
+import { ErrorMessage } from '../ErrorMessage';
+
 import {
   InputContainer,
   LabelContainer,
   Tooltip,
   TooltipText,
   InputWrapper,
-  Error,
 } from './styles';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -49,7 +50,7 @@ const Input: FC<InputProps> = ({
 
   return (
     <InputContainer>
-      <LabelContainer htmlFor={name}>
+      <LabelContainer htmlFor={fieldName}>
         <p>{label}</p>
 
         {tooltip ? (
@@ -63,7 +64,7 @@ const Input: FC<InputProps> = ({
       <InputWrapper>
         <input
           type={isShowingContent ? 'text' : type}
-          id={name}
+          id={fieldName}
           ref={inputRef}
           defaultValue={defaultValue}
           {...props}
@@ -74,7 +75,7 @@ const Input: FC<InputProps> = ({
           </button>
         ) : null}
 
-        {error && <Error>{error}</Error>}
+        {error && <ErrorMessage>{error}</ErrorMessage>}
       </InputWrapper>
     </InputContainer>
   );
