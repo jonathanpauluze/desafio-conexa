@@ -31,7 +31,7 @@ export const InputWrapper = styled.div`
   button {
     position: absolute;
     right: 0;
-    top: 50%;
+    top: 0.875rem;
     transform: translateY(-50%);
 
     padding: 0;
@@ -113,4 +113,11 @@ export const TooltipText = styled.span`
       border-color: transparent black transparent transparent;
     }
   }
+`;
+
+export const Error = styled.span`
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: #ff3333;
 `;

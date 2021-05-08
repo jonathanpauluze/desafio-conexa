@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { Form } from '@unform/web';
 
-export const SignInFormContainer = styled.form`
+export const SignInFormContainer = styled(Form)`
   width: 100%;
   max-width: 14.688rem;
 
