@@ -21,6 +21,7 @@ interface SignInCredentials {
 
 interface AuthContextData {
   user: string;
+  token: string;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
 }
@@ -54,6 +55,8 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     localStorage.setItem('@conexa:token', token);
     localStorage.setItem('@conexa:name', name);
 
+    api.defaults.headers.authorization = `Bearer ${token}`;
+
     setData({ token, name });
   }, []);
 
@@ -65,7 +68,9 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user: data.name, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{ user: data.name, token: data.token, signIn, signOut }}
+    >
       {children}
     </AuthContext.Provider>
   );
