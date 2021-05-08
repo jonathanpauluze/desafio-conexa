@@ -14,6 +14,7 @@ export const FixedFooterContainer = styled.footer`
     width: 100%;
     height: 4.5rem;
     max-width: 1366px;
+    margin: 0 auto;
     padding: 0 1rem;
 
     display: flex;
