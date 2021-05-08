@@ -29,22 +29,29 @@ const AppointmentsList: FC = () => {
   const { token } = useAuth();
 
   useEffect(() => {
-    const fetchAppointments = async () => {
-      const requestConfig = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+    if (token) {
+      const fetchAppointments = async () => {
+        const requestConfig = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+
+        const response = await api.get(
+          '/consultations?_expand=patient',
+          requestConfig,
+        );
+
+        localStorage.setItem(
+          '@conexa:appointments',
+          JSON.stringify(response.data),
+        );
+
+        setAppointments(response.data);
       };
 
-      const response = await api.get(
-        '/consultations?_expand=patient',
-        requestConfig,
-      );
-
-      setAppointments(response.data);
-    };
-
-    fetchAppointments();
+      fetchAppointments();
+    }
   }, [token]);
 
   if (!appointments.length) {
