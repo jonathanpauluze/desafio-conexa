@@ -9,8 +9,13 @@ import logoImg from '../../assets/logo-conexa.svg';
 
 import { HeaderContainer, HeaderContent, HeaderMessage } from './styles';
 
-const Header: FC = () => {
-  const { user, token, signOut } = useAuth();
+interface HeaderProps {
+  onOpenSignOutModal?(): void;
+}
+
+const Header: FC<HeaderProps> = ({ onOpenSignOutModal }) => {
+  const { user } = useAuth();
+  const token = localStorage.getItem('@conexa:token');
 
   return (
     <HeaderContainer>
@@ -22,7 +27,7 @@ const Header: FC = () => {
         {token ? (
           <HeaderMessage>
             <p>Olá, Dr. {user}</p>
-            <ButtonOutline onClick={signOut}>Sair</ButtonOutline>
+            <ButtonOutline onClick={onOpenSignOutModal}>Sair</ButtonOutline>
           </HeaderMessage>
         ) : null}
       </HeaderContent>

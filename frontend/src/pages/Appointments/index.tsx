@@ -1,5 +1,5 @@
 import { FC, useState, useEffect, useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
@@ -8,6 +8,7 @@ import { Header } from '../../components/Header';
 import { AppointmentsList } from '../../components/AppointmentsList';
 import { FixedFooter } from '../../components/FixedFooter';
 import { NewAppointmentModal } from '../../components/NewAppointmentModal';
+import { SignOutModal } from '../../components/SignOutModal';
 
 import { AppointmentsContainer } from './styles';
 
@@ -32,15 +33,17 @@ const Appointments: FC = () => {
   const [isNewAppointmentModalOpen, setIsNewAppointmentModalOpen] = useState(
     false,
   );
+  const [isSignOutModalOpen, setIsSignOutModalOpen] = useState(false);
   const { token } = useAuth();
-  const history = useHistory();
-
-  if (!token) {
-    history.push('/');
-  }
 
   useEffect(() => {
-    if (token) {
+    const storedAppointments = localStorage.getItem('@conexa:appointments');
+
+    if (storedAppointments) {
+      const parsedAppointments = JSON.parse(storedAppointments);
+
+      setAppointments(parsedAppointments);
+    } else {
       const fetchAppointments = async () => {
         const requestConfig = {
           headers: {
@@ -63,7 +66,7 @@ const Appointments: FC = () => {
 
       fetchAppointments();
     }
-  }, [token]);
+  }, [setAppointments, token]);
 
   const handleOpenNewAppointmentModal = useCallback(() => {
     setIsNewAppointmentModalOpen(true);
@@ -111,9 +114,17 @@ const Appointments: FC = () => {
     [token, appointments],
   );
 
-  return (
+  const handleOpenSignOutModal = useCallback(() => {
+    setIsSignOutModalOpen(true);
+  }, []);
+
+  const handleCloseSignOutModal = useCallback(() => {
+    setIsSignOutModalOpen(false);
+  }, []);
+
+  return token ? (
     <>
-      <Header />
+      <Header onOpenSignOutModal={handleOpenSignOutModal} />
 
       <AppointmentsContainer>
         <h1>Consultas</h1>
@@ -128,7 +139,13 @@ const Appointments: FC = () => {
         onRequestClose={handleCloseNewAppointmentModal}
         createNewAppointment={createNewAppointment}
       />
+      <SignOutModal
+        isOpen={isSignOutModalOpen}
+        onRequestClose={handleCloseSignOutModal}
+      />
     </>
+  ) : (
+    <Redirect to="/" />
   );
 };
 
