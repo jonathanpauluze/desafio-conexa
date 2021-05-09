@@ -1,74 +1,74 @@
-# Bem vindo ao desafio Front-end Conexa!
-
-### O Caso
-
-Precisamos construir um front onde nossos médicos de plantão consigam ver as consultas agendadas e agendar novas consultas.
-
-<div width="100%" >
-    <img src="/images/login_320x568px.png" width="40%"  />
-    <img src="/images/home_320x568px.png" width="40%" align="right"/>
+<div align="center"> 
+  <img src="frontend/src/assets/logo-conexa.svg" alt="Conexa Saúde" />
 </div>
 
-Será necessário ter uma tela de login para que médicos da clínica consigam acessar a aplicação, utilizando email e senha ([credenciais para teste](#credenciais-para-teste)).
+<div align="center">
+  <a href="#information_source-Sobre-o-projeto">Sobre</a> &#xa0; | &#xa0;
+  <a href="#rocket-tecnologias-e-ferramentas">Tecnologias e ferramentas</a> &#xa0; | &#xa0;
+  <a href="#wrench-como-rodar-o-projeto">Como rodar o projeto</a>
+</div>
 
-A response do login será um token de validação e o nome do médico.
+<br>
 
-O médico poderá listar e cadastrar consultas.
+## :information_source: Sobre o projeto ##
+Desafio para posição de Desenvolvedor Front-End na Conexa Saúda.
 
-No projeto há um diretório com o backend com os dados mockados. Basta, dentro do diretório /backend, rodar:
+Na aplicação é possível:
+- efetuar autenticação
+- listar consultas
+- criar consultas
+
+## :rocket: Tecnologias e ferramentas ##
+
+Tecnologias e ferramentas que foram usadas no desenvolvimento do projeto:
+
+- [React](https://pt-br.reactjs.org/) para construção da aplicação
+- [React Router](https://reactrouter.com/) para lidar com roteamento
+- [TypeScript](https://www.typescriptlang.org/) como linguagem principal
+- [Styled Components](styled-components.com) para construção dos estilos
+- [Unform](https://unform.dev) para lidar com formulários de forma performática
+- [Axios](https://axios-http.com) para lidar com as requisições
+- [Yup](https://github.com/jquense/yup) para validação de formulários
+- [ESLint](https://eslint.org) para encontrar problemas no código
+- [Prettier](https://prettier.io) para formatação do código
+
+## :wrench: Como rodar o projeto ##
+
+É necessário ter instalado:
+- [Git](https://git-scm.com)
+- [Node.js](https://nodejs.org/)
+- [Yarn](https://yarnpkg.com/)
+
+### Faça um clone do projeto
 
 ```bash
-yarn
+$ git clone https://gitlab.com/jonathanpauluze/desafio-tecnico-frontend-conexa.git
 ```
 
-...para instalar as dependências, e logo após rodar:
-
+### Instale as dependências
 ```bash
-yarn start
+# Acesse o diretório do projeto
+$ cd desafio-tecnico-frontend-conexa
+
+# Instale as dependências do back-end
+$ cd backend
+$ yarn
+
+# Instale as dependências do front-end
+$ cd frontend
+$ yarn
 ```
 
-...para rodar o servidor em http://localhost:3333.
+### Inicie a aplicação
+```bash
+# Inicie o servidor
+$ cd backend
+$ yarn start # servidor na porta 3333
 
-### Recursos
+# Abra uma nova aba no terminal e inicie a aplicação
+$ cd frontend
+$ yarn start # app na porta 3000
+```
 
-Endpoints:
 
-- Fazer Login => POST http://localhost:3333/login
-- Buscar Consultas => GET http://localhost:3333/consultations?_expand=patient
-- Nova Consulta => POST http://localhost:3333/consultations
-  - Deve usar o token fornecido pelo login
-  - body: {
-    "patientId": 1,
-    "date": "Fri Feb 05 2021 10:20:00 GMT-0300 (Brasilia Standard Time)"
-    }
-
-### O que você deve fazer
-
-- Fazer o Fork do repositório, criar uma nova branch e abrir um merge request para a master do nosso repositório quando concluir
-- Desenvolver essa aplicação usando ReactJs
-- Atender os requisitos descritos no Caso
-
-### O que será avaliado
-
-- Se os requisitos foram atendidos
-- Conhecimento de git
-- Documentação
-- Clareza e qualidade do código
-- Estrutura da aplicação
-- Bom uso das features da linguagem
-- Aplicação bem testada
-- Fidelidade ao layout
-- O uso de typescript nos deixará mais feliz :)
-
-Em caso de dúvidas sobre o desafio, entre em contato.
-
-### Layout
-
-[Figma](https://www.figma.com/file/eaD2LIOcswFJO2SblVyIeq/Desafio-frontend-Conexa?node-id=1%3A446)
-
-Obs.: A funcionalidade de agendar uma nova consulta deverá ser um modal (Não presente no layout) com os campos necessários, incluindo Datepicker; seguindo mesma linha do layout fornecido.
-
-### Credenciais para teste
-
-email: gandalf@mail.com
-senha: 123456
+<p align="center">Feito com ♥ por <a href="https://linkedin.com/in/jonathanpauluze" target="_blank">Jonathan Pauluze</a></p>
