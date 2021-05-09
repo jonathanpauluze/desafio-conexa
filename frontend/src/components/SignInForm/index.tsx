@@ -1,6 +1,7 @@
 import { FC, useRef, useCallback } from 'react';
 import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
+import { useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
@@ -17,6 +18,7 @@ import { SignInFormContainer } from './styles';
 const SignInForm: FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { signIn } = useAuth();
+  const history = useHistory();
 
   const handleSubmit = useCallback(
     async (data: SignInCredentials) => {
@@ -35,6 +37,8 @@ const SignInForm: FC = () => {
         });
 
         await signIn(data);
+
+        history.push('/appointments');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -55,7 +59,7 @@ const SignInForm: FC = () => {
         });
       }
     },
-    [signIn],
+    [signIn, history],
   );
 
   return (
