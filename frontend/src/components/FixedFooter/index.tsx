@@ -5,12 +5,18 @@ import { Button } from '../Button';
 
 import { FixedFooterContainer } from './styles';
 
-const FixedFooter: FC = () => {
+interface FixedFooterProps {
+  onOpenNewTransactionModal(): void;
+}
+
+const FixedFooter: FC<FixedFooterProps> = ({ onOpenNewTransactionModal }) => {
   return (
     <FixedFooterContainer>
       <div>
         <ButtonOutline type="button">Ajuda</ButtonOutline>
-        <Button type="button">Agendar Consulta</Button>
+        <Button type="button" onClick={onOpenNewTransactionModal}>
+          Agendar Consulta
+        </Button>
       </div>
     </FixedFooterContainer>
   );
