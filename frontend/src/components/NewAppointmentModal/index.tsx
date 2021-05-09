@@ -25,6 +25,7 @@ interface NewAppointmentModalProps {
 interface CreateAppointmentData {
   patientId: string;
   date: string;
+  time: string;
 }
 
 interface Patient {
@@ -75,6 +76,7 @@ const NewAppointmentModal: FC<NewAppointmentModalProps> = ({
         const validationSchema = Yup.object().shape({
           patientId: Yup.string().notOneOf(['0'], 'Paciente obrigatório'),
           date: Yup.string().required('Data obrigatória'),
+          time: Yup.string().required('Hora obrigatória'),
         });
 
         await validationSchema.validate(data, {
@@ -125,6 +127,8 @@ const NewAppointmentModal: FC<NewAppointmentModalProps> = ({
         </Select>
 
         <Input name="date" type="date" label="Data" />
+
+        <Input name="time" type="time" label="Hora" />
 
         <Button type="submit">Agendar</Button>
       </NewAppointmentForm>

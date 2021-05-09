@@ -26,6 +26,7 @@ interface Appointment {
 interface CreateAppointmentData {
   patientId: string;
   date: string;
+  time: string;
 }
 
 const Appointments: FC = () => {
@@ -86,7 +87,7 @@ const Appointments: FC = () => {
 
       const requestData = {
         patientId: data.patientId,
-        date: new Date(data.date).toString(),
+        date: new Date(`${data.date} ${data.time}`).toString(),
       };
 
       const response = await api.post(
