@@ -13,6 +13,7 @@ export const GlobalStyle = createGlobalStyle`
     --blue: #2E50D4;
     --blue-medium: #2540AA;
     --blue-dark: #1C307F;
+    --salmon-light: #FFA490;
   }
 
 
