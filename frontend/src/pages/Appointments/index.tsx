@@ -111,6 +111,11 @@ const Appointments: FC = () => {
       };
 
       setAppointments([...appointments, appointment]);
+
+      localStorage.setItem(
+        '@conexa:appointments',
+        JSON.stringify([...appointments, appointment]),
+      );
     },
     [token, appointments],
   );
