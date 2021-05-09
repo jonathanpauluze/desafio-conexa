@@ -25,7 +25,7 @@ Tecnologias e ferramentas que foram usadas no desenvolvimento do projeto:
 - [React](https://pt-br.reactjs.org/) para construção da aplicação
 - [React Router](https://reactrouter.com/) para lidar com roteamento
 - [TypeScript](https://www.typescriptlang.org/) como linguagem principal
-- [Styled Components](styled-components.com) para construção dos estilos
+- [Styled Components](https://styled-components.com) para construção dos estilos
 - [Unform](https://unform.dev) para lidar com formulários de forma performática
 - [Axios](https://axios-http.com) para lidar com as requisições
 - [Yup](https://github.com/jquense/yup) para validação de formulários
