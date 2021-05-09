@@ -13,8 +13,8 @@ export const SelectContainer = styled.div`
   select {
     width: 100%;
     height: 1.75rem;
-    border: 2px solid var(--gray);
-    border-radius: 0.25rem;
+    border: 0;
+    border-bottom: 2px solid var(--gray);
     background-color: transparent;
   }
 `;
