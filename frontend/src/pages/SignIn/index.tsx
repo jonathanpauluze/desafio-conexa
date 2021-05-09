@@ -1,7 +1,5 @@
 import { FC } from 'react';
-import { useHistory } from 'react-router-dom';
-
-import { useAuth } from '../../hooks/auth';
+import { Redirect } from 'react-router-dom';
 
 import { Header } from '../../components/Header';
 import { SignInForm } from '../../components/SignInForm';
@@ -15,14 +13,11 @@ import {
 } from './styles';
 
 const SignIn: FC = () => {
-  const { token } = useAuth();
-  const history = useHistory();
+  const token = localStorage.getItem('@conexa:token');
 
-  if (token) {
-    history.push('/appointments');
-  }
-
-  return (
+  return token ? (
+    <Redirect to="/appointments" />
+  ) : (
     <>
       <Header />
 
