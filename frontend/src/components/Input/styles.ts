@@ -14,6 +14,7 @@ export const InputWrapper = styled.div`
     height: 1.75rem;
     border: 0;
     border-bottom: 2px solid var(--gray);
+    background-color: transparent;
 
     &::placeholder {
       padding: 0.5rem 0;
